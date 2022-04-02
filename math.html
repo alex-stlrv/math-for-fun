@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH4FUN</title>
+    <link rel="stylesheet" href="./math.css">
+    <script src="./math.js" defer></script>
+</head>
+<body>
+    <header>
+        <p id="title">MATH 4 FUN</p>
+        <div id="menu-buttons">
+        <div class="challenge-type">
+            <button type="button" id="add">ADD</button>
+            <button type="button" id="subtract">SUBTRACT</button>
+            <button type="button" id="multiply">MULTIPLY</button>
+            <button type="button" id="divide">DIVIDE</button>
+            <button type="button" id="challenge">MEGA CHALLENGE</button>
+        </div>
+        <div class="reset"><button type="button" id="new-game">NEW GAME</button></div>
+        </div>
+    </header>
+    <main>
+        <div id="question">
+            <p id="math-question">AND THE NEW QUESTION IS ...</p>
+        </div>
+        <div id="options">
+                <button type="button" id="first-button">...</button>
+                <button type="button" id="second-button">...</button>
+                <button type="button" id="third-button">...</button>
+                <button type="button" id="fourth-button">...</button>
+            
+        </div>
+        <div id="feedback">
+            <p id="feedback-text">YOU ARE DOING AWESOME!</p>
+        </div>
+        <div id="score">
+            <p id="number-buddies"><strong>SCORE: </strong> YOU ARE A MATH4FUN-STER!  YOU HAVE COLLECTED <strong id="updatable-buddies"> 1 OUT OF 11</strong> MATH4FUN BUDDIES!</p>
+            <ul id="buddies-list">
+                <li  id="bear"><img src="./images_math/bear.jpg" id="bear-img"></li>
+                <li id="fox"><img src="./images_math/fox.jpg" id="fox-img"></li>
+                <li id="lion"><img src="./images_math/lion.jpg" id="lion-img"></li>
+                <li id="racoon"><img src="./images_math/racoon.jpg" id="racoon-img"></li>
+                <li  id="seal"><img src="./images_math/seal.jpg" id="seal-img"></li>
+                <li id="tiger"><img src="./images_math/tiger.jpg" id="tiger-img"></li>
+                <li id="super-mouse"><img src="./images_math/super-mouse.jpg" id="super-mouse-img" style="visibility:visible"></li>
+                <li id="super-panda"><img src="./images_math/super-panda.jpg" id="super-panda-img"></li>
+                <li id="super-sheep"><img src="./images_math/super-sheep.jpg" id="super-sheep-img"></li>
+                <li id="super-sloath"><img src="./images_math/super-sloath.jpg" id="super-sloath-img"></li>
+                <li id="super-tiger"><img src="./images_math/super-tiger.jpg" id="super-tiger-img"></li>
+            </ul>
+            <p id="credits"><a href="https://www.freepik.com/">Designed by Freepik</a></p>        
+        </div>
+    </main>
+    </body>
+</html>

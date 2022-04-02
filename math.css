@@ -1,0 +1,224 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;    
+    background-color: #3a86ff;
+}
+
+body {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-rows: 200px 1fr;
+    grid-template-areas: "header" "main";
+}
+
+main {
+    display: grid;
+    grid-area: main;
+    grid-template-rows: 25% 25% 15% 35%;
+    grid-template-columns: 100%;
+    grid-template-areas: "question" "options" "feedback" "score";
+    align-items: center;
+}
+
+header {
+    grid-area: header;
+    display: grid;
+    grid-template-rows: 60% 40%;
+    grid-template-areas: "title" "buttons";
+}
+
+#menu-buttons {
+    grid-area: buttons;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-areas: "challenge reset";
+}
+
+.challenge-type {
+    grid-area: challenge;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    margin-left: 15vw;  
+}
+
+.challenge-type > button {
+    flex: 0 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: #ff006e;
+    border: 5px dashed white;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+
+}
+
+#challenge {
+    background-color: #ff006e;
+    border: 7px double #ffe9ad;
+    color: white;
+}
+
+
+#new-game {
+    flex: 0 0 auto;
+    margin: 5px 0px 5px 0px;  
+    background-color: #8338ec; 
+    color:white;   
+    border: 5px dashed white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.reset {
+    grid-area: reset;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-content: flex-start; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#title {
+    grid-area: title;
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+#score {
+    grid-area: score;
+    display: grid;
+    grid-template-rows: 25% 65% 10%;
+    grid-template-areas: "number-buddies" "buddies-list" "credits";
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#number-buddies {
+    grid-area: number-buddies;
+    text-align: center;
+    font-size:1.5rem;
+    color: white;
+}
+
+#credits {
+    grid-area: credits;
+    text-align: end;
+}
+
+#buddies-list {
+    grid-area: buddies-list;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 9% 9% 9% 9% 9% 9% 9% 9% 9% 9% 10%; 
+    grid-template-areas: "bear fox lion racoon seal tiger super-mouse super-panda super-sheep super-sloath super-tiger";
+    background-color: white;
+    border: 15px dotted #3a86ff;
+    margin: 10px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#buddies-list li img {
+    max-height: 100px;
+    object-fit: cover;
+    visibility: hidden;
+}
+
+#bear {
+    grid-area: bear;
+}
+
+#lion {
+    grid-area: lion;
+}
+
+#fox {
+    grid-area: fox;
+}
+
+#racoon {
+    grid-area: racoon;
+}
+
+#seal {
+    grid-area: seal;
+}
+
+#tiger {
+    grid-area: tiger;
+}
+
+#super-mouse {
+    grid-area: super-mouse;
+}
+
+#super-panda {
+    grid-area: super-panda;
+}
+
+#super-sheep {
+    grid-area: super-sheep;
+}
+
+#super-sloath {
+    grid-area: super-sloath;
+}
+
+#super-tiger {
+    grid-area: super-tiger;
+}
+
+#question {
+    grid-area: question;
+    text-align: center;
+    font-size:2rem;
+    color:white;
+}
+
+#options {
+    grid-area: options;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+    align-items: center;
+}
+
+#feedback {
+    grid-area: feedback;
+}
+
+#feedback p {
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+#options button {
+    flex: 1;
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 40px;
+    padding: 20px;
+    text-align: center;
+    max-width: 150px;
+    max-height: 150px;
+    min-width: 100px;
+    min-height: 100px;
+    border: 5px dashed #3a86ff;
+    background-color: white;
+    color: #005ef5;
+}
