@@ -16,6 +16,7 @@ var lion = document.getElementById("lion-img");
 var racoon = document.getElementById("racoon-img");
 var seal = document.getElementById("seal-img");
 var tiger = document.getElementById("tiger-img");
+var superMouse = document.getElementById("super-mouse-img");
 var superTiger = document.getElementById("super-tiger-img");
 var superPanda = document.getElementById("super-panda-img");
 var superSheep = document.getElementById("super-sheep-img");
@@ -26,8 +27,9 @@ var feedback = document.getElementById("feedback-text");
 var buddiesText = document.getElementById("updatable-buddies");
 
 const answerButtons = [firstAnsBtn, secondAnsBtn, thirdAnsBtn, fourthAnsBtn];
-const imgList = [bear,fox,lion,racoon,seal,tiger, superPanda,superSheep,superSloath, superTiger];
-let imgPos = [0,1,2,3,4,5,6,7,8,9];
+const imgList = [bear, fox, lion, racoon, seal, tiger, superMouse, superPanda, superSheep, superSloath, superTiger];
+let gameImgList;
+setGameImages();
 const ansPos = [0,1,2,3];
 const posFeedbackList = [
     "THAT'S CORRECT! YOU ARE DOING AWESOME!",
@@ -58,6 +60,15 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+function setGameImages(newGame = true) {
+    if (newGame === true) {
+        gameImgList = [...imgList];
+        gameImgList = gameImgList.sort(() => Math.random() - 0.5);
+    } 
+    const showImage = gameImgList.pop();
+    showImage.style.visibility = "visible";
+}
+
 function resetPostAnswer() {
     btnListener = false;
     question.textContent = "AND THE NEXT QUESTION IS...";
@@ -72,9 +83,7 @@ function giveABuddy (run, max) {
         runningCorrect = 0;
         receivedBuddies++;
         buddiesText.textContent = receivedBuddies.toString() + " OF 11 "
-        const buddyPos = imgPos[getRandomInt(imgPos.length)];
-        imgList[buddyPos].style.visibility = "visible";
-        imgPos = imgPos.filter(pos => pos !== buddyPos);
+        setGameImages(false);
         feedback.textContent = "THAT'S CORRECT! YOU GOT A NEW BUDDY!"
     } else {
         feedback.textContent = posFeedbackList[getRandomInt(posFeedbackList.length)];
@@ -224,8 +233,7 @@ chBtn.onclick = function () {
     trial++;
 }
 
-newGame.onclick = function () {
-    imgPos = [0,1,2,3,4,5,6,7,8,9];
+newGame.onclick = function () {    
     btnListener = false;
     correctBtn = 0;
     runningCorrect = 0;
@@ -237,6 +245,7 @@ newGame.onclick = function () {
     feedback.textContent = "YOU ARE DOING AWESOME!";
     buddiesText.textContent = " 1 OUT OF 11";
     trial = 0;
+    setGameImages();
 }
 
 
