@@ -79,7 +79,7 @@ function giveABuddy () {
         maxCorrect = runningCorrect;
         runningCorrect = 0;
         receivedBuddies++;
-        buddiesText.textContent = receivedBuddies.toString() + " OF 11 "
+        buddiesText.textContent = `${receivedBuddies} OF 11`
         setGameImages(false);
         feedback.textContent = "THAT'S CORRECT! YOU GOT A NEW BUDDY!"
     } else {
@@ -120,7 +120,7 @@ addBtn.onclick = function () {
         usedNums.push(ans);
         answerButtons[el].textContent = ans.toString()
     })
-    question.textContent = "WHAT IS "+ num1.toString()+ " + " + num2.toString() + "?";
+    question.textContent = `WHAT IS ${num1} + ${num2} ?`;
     correctBtn = correctAnsPos;
     btnListener = true;
 }
@@ -143,7 +143,7 @@ subBtn.onclick = function () {
         usedNums.push(ans);
         answerButtons[el].textContent = ans.toString()
     })
-    question.textContent = "WHAT IS "+ sum.toString()+ " - " + num2.toString() + "?";
+    question.textContent = `WHAT IS ${sum} - ${num2} ?`;
     correctBtn = correctAnsPos;
     btnListener = true;
     trial++;
@@ -166,7 +166,7 @@ multBtn.onclick = function () {
         usedNums.push(ans);
         answerButtons[el].textContent = ans.toString()
     })
-    question.textContent = "WHAT IS "+ num1.toString()+ " x " + num2.toString() + "?";
+    question.textContent = `WHAT IS ${num1} x ${num2} ?`;
     correctBtn = correctAnsPos;
     btnListener = true;
     trial++;
@@ -190,7 +190,7 @@ divBtn.onclick = function () {
         usedNums.push(ans);
         answerButtons[el].textContent = ans.toString()
     })
-    question.textContent = "WHAT IS "+ prod.toString()+ " % " + num2.toString() + "?";
+    question.textContent = `WHAT IS ${prod} % ${num2} ?`;
     correctBtn = correctAnsPos;
     btnListener = true;
     trial++;
@@ -204,13 +204,13 @@ chBtn.onclick = function () {
     let correctAns = 0;
     if (trial % 2 === 0) {
         correctAns = num1 + num2 + num3; 
-        question.textContent = "WHAT IS "+ num1.toString() + " + " + num2.toString()+ " + " + num3.toString() + "?";
+        question.textContent = `WHAT IS ${num1} + ${num2} + ${num3} ?`;
     } else if (trial % 3 === 0) {
         correctAns = num1 * num2 + num3;
-        question.textContent = "WHAT IS "+ num1.toString() + " x " + num2.toString()+ " + " + num3.toString() + "?";
+        question.textContent = `WHAT IS ${num1} x ${num2} + ${num3} ?`;
     } else {
         correctAns = num1 * (num2 + num3);
-        question.textContent = "WHAT IS "+ num1.toString() + " x (" + num2.toString()+ " + " + num3.toString() + ") ?"; 
+        question.textContent = `WHAT IS ${num1} x (${num2} + ${num3}) ?`; 
 
     }
     const correctAnsPos = getRandomInt(3);
