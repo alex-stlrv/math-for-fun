@@ -77,8 +77,8 @@ function resetPostAnswer() {
     })
 }
 
-function giveABuddy (run, max) {
-    if (run > max) {
+function giveABuddy () {
+    if (runningCorrect > maxCorrect) {
         maxCorrect = runningCorrect;
         runningCorrect = 0;
         receivedBuddies++;
@@ -96,7 +96,7 @@ answerButtons.forEach((el, index) => {
         if (btnListener === false) return
         if (correctBtn === index) {
             runningCorrect++;
-            giveABuddy(runningCorrect, maxCorrect);
+            giveABuddy();
         } else if (correctBtn !== index) {
             feedback.textContent = negFeedbackList[getRandomInt(negFeedbackList.length)];
             runningCorrect = 0;
