@@ -1,3 +1,5 @@
+import { getRandomInt } from './support_functions/getRandom.js'; 
+
 var addBtn = document.getElementById("add");
 var subBtn = document.getElementById("subtract");
 var multBtn = document.getElementById("multiply");
@@ -54,11 +56,6 @@ let runningCorrect = 0;
 let maxCorrect = 0;
 let receivedBuddies = 1;
 let trial = 0;
-
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
 
 function setGameImages(newGame = true) {
     if (newGame === true) {
