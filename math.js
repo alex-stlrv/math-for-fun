@@ -27,6 +27,8 @@ var superSloath = document.getElementById("super-sloath-img");
 var question = document.getElementById("math-question");
 var feedback = document.getElementById("feedback-text");
 var buddiesText = document.getElementById("updatable-buddies");
+var winnerFeedback = document.getElementById("winner-feedback");
+var scoreDisplay = document.getElementById("score-display");
 
 const answerButtons = [firstAnsBtn, secondAnsBtn, thirdAnsBtn, fourthAnsBtn];
 const imgList = [bear, fox, lion, racoon, seal, tiger, superMouse, superPanda, superSheep, superSloath, superTiger];
@@ -115,12 +117,23 @@ function giveABuddy () {
     if (runningCorrect > maxCorrect) {
         maxCorrect = runningCorrect;
         runningCorrect = 0;
-        receivedBuddies++;
-        buddiesText.textContent = `${receivedBuddies} OF 11`
-        setGameImages(false);
-        feedback.textContent = "THAT'S CORRECT! YOU GOT A NEW BUDDY!"
+        if (receivedBuddies <= 10) {
+            receivedBuddies++;
+            setGameImages(false);
+        }
+        isWinner();
+        feedback.textContent = "THAT'S CORRECT! YOU GOT A NEW BUDDY!";
     } else {
         feedback.textContent = posFeedbackList[getRandomInt(posFeedbackList.length)];
+    }
+}
+
+function isWinner () {
+    if (receivedBuddies === 11) {
+        scoreDisplay.style.display = "none";
+        winnerFeedback.style.display = "block";
+    } else {
+        buddiesText.textContent = `${receivedBuddies} OF 11`;
     }
 }
 
@@ -207,6 +220,8 @@ newGame.onclick = function () {
     question.textContent = "AND THE NEW QUESTION IS ...";
     feedback.textContent = "YOU ARE DOING AWESOME!";
     buddiesText.textContent = " 1 OUT OF 11";
+    scoreDisplay.style.display = "block";
+    winnerFeedback.style.display = "none";
     trial = 0;
     setGameImages();
 }

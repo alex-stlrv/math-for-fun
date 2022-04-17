@@ -17,7 +17,7 @@ body {
 main {
     display: grid;
     grid-area: main;
-    grid-template-rows: 25% 25% 15% 35%;
+    grid-template-rows: 25% 20% 15% 40%;
     grid-template-columns: 100%;
     grid-template-areas: "question" "options" "feedback" "score";
     align-items: center;
@@ -105,11 +105,15 @@ header {
     align-items: flex-end;
 }
 
-#number-buddies {
+ #number-buddies {
     grid-area: number-buddies;
     text-align: center;
     font-size:1.5rem;
     color: white;
+}
+
+#number-buddies p {
+    width: 70rem;
 }
 
 #credits {
