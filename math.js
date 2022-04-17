@@ -87,19 +87,6 @@ function displayAnswers (start, end, pos, deletes, insertResponse = false, corre
     correctBtn = gameAnswerButtons[0];
 }
 
-function setGameAnswers () {
-    gameAnswerList = [...Array(end - start + 1).keys()].map(x => x + start);
-    gameAnswerList = gameAnswerList.sort(() => Math.random() - 0.5);
-    gameAnswers = gameAnswerList.splice(pos, deletes);
-    if (insertResponse === true) {
-        gameAnswers.unshift(correctResponse);
-        gameAnswers = [...new Set(gameAnswers)];
-        if (gameAnswers.length > end) {
-            gameAnswers.pop()
-        }
-    }
-}
-
 function resetBtnListenersIncrementTrial () {
     btnListener = true;
     trial++;
