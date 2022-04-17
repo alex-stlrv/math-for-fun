@@ -30,9 +30,12 @@ var buddiesText = document.getElementById("updatable-buddies");
 
 const answerButtons = [firstAnsBtn, secondAnsBtn, thirdAnsBtn, fourthAnsBtn];
 const imgList = [bear, fox, lion, racoon, seal, tiger, superMouse, superPanda, superSheep, superSloath, superTiger];
+let gameAnswerButtons;
 let gameImgList;
+let gameAnswerList;
+let gameAnswers;
+let correctBtn;
 setGameImages();
-const ansPos = [0,1,2,3];
 const posFeedbackList = [
     "THAT'S CORRECT! YOU ARE DOING AWESOME!",
     "THAT'S CORRECT! YOUR BUDDIES ARE PROUD OF YOU!",
@@ -51,19 +54,53 @@ const negFeedbackList = [
 ];
 
 let btnListener = false;
-let correctBtn = 0;
 let runningCorrect = 0;
 let maxCorrect = 0;
 let receivedBuddies = 1;
 let trial = 0;
 
-function setGameImages(newGame = true) {
+function setGameImages (newGame = true) {
     if (newGame === true) {
         gameImgList = [...imgList];
         gameImgList = gameImgList.sort(() => Math.random() - 0.5);
     } 
     const showImage = gameImgList.pop();
     showImage.style.visibility = "visible";
+}
+
+function displayAnswers (start, end, pos, deletes, insertResponse = false, correctResponse = 0) {
+    gameAnswerList = [...Array(end - start + 1).keys()].map(x => x + start);
+    gameAnswerList = gameAnswerList.sort(() => Math.random() - 0.5);
+    gameAnswers = gameAnswerList.splice(pos, deletes);
+    if (insertResponse === true) {
+        gameAnswers.unshift(correctResponse);
+        gameAnswers = [...new Set(gameAnswers)];
+        if (gameAnswers.length > end) {
+            gameAnswers.pop()
+        }
+    }
+    gameAnswerButtons = [...answerButtons];
+    gameAnswerButtons = gameAnswerButtons.sort(() => Math.random() - 0.5);
+    gameAnswerButtons.forEach((el, index) => el.textContent = gameAnswers[index].toString())
+    correctBtn = gameAnswerButtons[0];
+}
+
+function setGameAnswers () {
+    gameAnswerList = [...Array(end - start + 1).keys()].map(x => x + start);
+    gameAnswerList = gameAnswerList.sort(() => Math.random() - 0.5);
+    gameAnswers = gameAnswerList.splice(pos, deletes);
+    if (insertResponse === true) {
+        gameAnswers.unshift(correctResponse);
+        gameAnswers = [...new Set(gameAnswers)];
+        if (gameAnswers.length > end) {
+            gameAnswers.pop()
+        }
+    }
+}
+
+function resetBtnListenersIncrementTrial () {
+    btnListener = true;
+    trial++;
 }
 
 function resetPostAnswer() {
@@ -87,14 +124,13 @@ function giveABuddy () {
     }
 }
 
-
-answerButtons.forEach((el, index) => {
+answerButtons.forEach(el => {
     el.onclick = function () {
         if (btnListener === false) return
-        if (correctBtn === index) {
+        if (el === correctBtn) {
             runningCorrect++;
             giveABuddy();
-        } else if (correctBtn !== index) {
+        } else {
             feedback.textContent = negFeedbackList[getRandomInt(negFeedbackList.length)];
             runningCorrect = 0;
         }
@@ -102,98 +138,41 @@ answerButtons.forEach((el, index) => {
     }
 })
 
-
 addBtn.onclick = function () {
     if (btnListener === true) return
+    displayAnswers(10, 20, 6, 4);
     const num1 = getRandomInt(10);
-    const num2 = getRandomInt(10);
-    const correctAns = num1 + num2;
-    const correctAnsPos = getRandomInt(3);
-    answerButtons[correctAnsPos].textContent = correctAns.toString();
-    const remAnsPos = ansPos.filter(pos => pos != correctAnsPos);
-    let usedNums = [];
-    remAnsPos.forEach(el => {
-        let ans = num1 + getRandomInt(10);
-        while (ans === correctAns || usedNums.includes(ans)) {
-            ans = num1 + getRandomInt(10);
-        }
-        usedNums.push(ans);
-        answerButtons[el].textContent = ans.toString()
-    })
+    const num2 = gameAnswers[0] - num1;
     question.textContent = `WHAT IS ${num1} + ${num2} ?`;
-    correctBtn = correctAnsPos;
-    btnListener = true;
+    resetBtnListenersIncrementTrial();
 }
 
 subBtn.onclick = function () {
     if (btnListener === true) return
-    const num1 = getRandomInt(10);
-    const num2 = getRandomInt(10);
-    const sum = num1 + num2;
-    const correctAns = num1;
-    const correctAnsPos = getRandomInt(3);
-    answerButtons[correctAnsPos].textContent = correctAns.toString();
-    const remAnsPos = ansPos.filter(pos => pos != correctAnsPos);
-    let usedNums = [];
-    remAnsPos.forEach(el => {
-        let ans = getRandomInt(10);
-        while (ans === correctAns || usedNums.includes(ans)) {
-            ans = getRandomInt(10);            
-        }
-        usedNums.push(ans);
-        answerButtons[el].textContent = ans.toString()
-    })
+    displayAnswers(0, 10, 6, 5);
+    const num2 = gameAnswers.pop(); 
+    const sum = gameAnswers[0] + num2;
     question.textContent = `WHAT IS ${sum} - ${num2} ?`;
-    correctBtn = correctAnsPos;
-    btnListener = true;
-    trial++;
+    resetBtnListenersIncrementTrial();
 }
 
 multBtn.onclick = function () {
     if (btnListener === true) return
     const num1 = getRandomInt(5);
     const num2 = getRandomInt(5);
-    const correctAns = num1 * num2;
-    const correctAnsPos = getRandomInt(3);
-    answerButtons[correctAnsPos].textContent = correctAns.toString();
-    const remAnsPos = ansPos.filter(pos => pos != correctAnsPos);
-    let usedNums = [];
-    remAnsPos.forEach(el => {
-        let ans = getRandomInt(5) * getRandomInt(5);
-        while (ans === correctAns || usedNums.includes(ans)) {
-            ans = getRandomInt(5) * getRandomInt(5);            
-        }
-        usedNums.push(ans);
-        answerButtons[el].textContent = ans.toString()
-    })
+    const prod = num1 * num2;
+    displayAnswers(0, 25, 6, 4, true, prod);
     question.textContent = `WHAT IS ${num1} x ${num2} ?`;
-    correctBtn = correctAnsPos;
-    btnListener = true;
-    trial++;
+    resetBtnListenersIncrementTrial();
 }
 
 divBtn.onclick = function () {
     if (btnListener === true) return
-    const num1 = getRandomInt(5)+1;
-    const num2 = getRandomInt(5)+1;
-    const correctAns = num1;
-    const prod = num1 * num2;
-    const correctAnsPos = getRandomInt(3);
-    answerButtons[correctAnsPos].textContent = correctAns.toString();
-    const remAnsPos = ansPos.filter(pos => pos != correctAnsPos);
-    let usedNums = [];
-    remAnsPos.forEach(el => {
-        let ans = getRandomInt(10);
-        while (ans === correctAns || usedNums.includes(ans)) {
-            ans = getRandomInt(10);            
-        }
-        usedNums.push(ans);
-        answerButtons[el].textContent = ans.toString()
-    })
+    displayAnswers(1, 6, 1, 5);
+    const num2 = gameAnswers.pop(); 
+    const prod = gameAnswers[0] * num2;
     question.textContent = `WHAT IS ${prod} % ${num2} ?`;
-    correctBtn = correctAnsPos;
-    btnListener = true;
-    trial++;
+    resetBtnListenersIncrementTrial();
 }
 
 chBtn.onclick = function () {
@@ -201,9 +180,9 @@ chBtn.onclick = function () {
     const num1 = getRandomInt(5)+1;
     const num2 = getRandomInt(5)+1;
     const num3 = getRandomInt(5)+1;
-    let correctAns = 0;
+    let correctAns;
     if (trial % 2 === 0) {
-        correctAns = num1 + num2 + num3; 
+        correctAns = num1 + num2 + num3;
         question.textContent = `WHAT IS ${num1} + ${num2} + ${num3} ?`;
     } else if (trial % 3 === 0) {
         correctAns = num1 * num2 + num3;
@@ -213,21 +192,8 @@ chBtn.onclick = function () {
         question.textContent = `WHAT IS ${num1} x (${num2} + ${num3}) ?`; 
 
     }
-    const correctAnsPos = getRandomInt(3);
-    answerButtons[correctAnsPos].textContent = correctAns.toString();
-    const remAnsPos = ansPos.filter(pos => pos != correctAnsPos);
-    let usedNums = [];
-    remAnsPos.forEach(el => {
-        let ans = getRandomInt(20);
-        while (ans === correctAns || usedNums.includes(ans)) {
-            ans = getRandomInt(20);            
-        }
-        usedNums.push(ans);
-        answerButtons[el].textContent = ans.toString()
-    })
-    correctBtn = correctAnsPos;
-    btnListener = true;
-    trial++;
+    displayAnswers(0, 20, 6, 4, true, correctAns);
+    resetBtnListenersIncrementTrial();
 }
 
 newGame.onclick = function () {    
