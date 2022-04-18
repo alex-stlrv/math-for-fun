@@ -1,4 +1,4 @@
-#MATH 4 FUN
+# MATH 4 FUN
 
 A Math Quiz with a *mega fun* **MEGA CHALLENGE** option written in JavaScript, HTML, and CSS.
 
